@@ -1,30 +1,47 @@
-class Treenode:
+class TreeNode:
     def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
-
 
 class BinaryTree:
     def __init__(self):
         self.root = None
 
     def insert(self, data):
-       
+        new_node = TreeNode(data)
         if self.root is None:
-            self.root = TreeNode(data)
-        else:
-            self._insert_recursive(self.root, data)
+            self.root = new_node
+            return
 
-    def _insert_recursive(self, node, data):
-        
-        if data < node.data:
-            if node.left is None:
-                node.left = TreeNode(data)
+        queue = [self.root]
+        while queue:
+            temp = queue.pop(0)
+            if temp.left is None:
+                temp.left = new_node
+                return
             else:
-                self._insert_recursive(node.left, data)
-        else:
-            if node.right is None:
-                node.right = TreeNode(data)
+                queue.append(temp.left)
+
+            if temp.right is None:
+                temp.right = new_node
+                return
             else:
-                self._insert_recursive(node.right, data)
+                queue.append(temp.right)
+
+    def in_order_traversal(self, node):
+        if node:
+            self.in_order_traversal(node.left)
+            print(node.data, end=' ')
+            self.in_order_traversal(node.right)
+
+# Example usage:
+bt = BinaryTree()
+bt.insert(1)
+bt.insert(2)
+bt.insert(3)
+bt.insert(4)
+bt.insert(5)
+print("In-order Traversal:")
+bt.in_order_traversal(bt.root)  # Output: 4 2 5 1 3
+
