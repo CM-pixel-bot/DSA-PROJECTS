@@ -43,5 +43,5 @@ bt.insert(3)
 bt.insert(4)
 bt.insert(5)
 print("In-order Traversal:")
-bt.in_order_traversal(bt.root)  # Output: 4 2 5 1 3
+bt.in_order_traversal(bt.root) 
 
